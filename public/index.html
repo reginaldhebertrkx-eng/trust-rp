@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trust RP Management</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI',Tahoma,sans-serif;background:#080a0f;color:#e8eaf0;min-height:100vh}
+.nav{background:#0d1117;padding:16px 24px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid rgba(240,192,64,0.1)}
+.logo{font-size:20px;font-weight:800;color:#f0c040}
+.btn{background:linear-gradient(135deg,#f0c040,#d4a820);color:#000;padding:10px 24px;border-radius:8px;font-weight:700;text-decoration:none;border:none;cursor:pointer;font-size:14px}
+.hero{text-align:center;padding:100px 20px}
+.hero h1{font-size:42px;margin-bottom:16px}
+.hero p{color:#94a3b8;margin-bottom:32px;font-size:16px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px;padding:40px;max-width:1000px;margin:0 auto}
+.card{background:#111520;border:1px solid rgba(255,255,255,0.06);border-radius:12px;padding:24px;text-align:center}
+.card h3{color:#f0c040;margin-bottom:8px}
+.card p{color:#94a3b8;font-size:14px}
+#app{display:none}
+.user-bar{display:flex;align-items:center;gap:12px}
+.user-bar img{width:36px;height:36px;border-radius:50%}
+</style>
+</head>
+<body>
+
+<div id="landing">
+  <nav class="nav">
+    <div class="logo">TRUST RP</div>
+    <a href="/auth/discord" class="btn">دخول Discord</a>
+  </nav>
+  <div class="hero">
+    <h1>مرحباً في Trust RP</h1>
+    <p>نظام إدارة احترافي متكامل للسيرفر</p>
+    <a href="/auth/discord" class="btn">سجل دخول الآن</a>
+  </div>
+  <div class="cards">
+    <div class="card"><h3>📋 تقديم طلب</h3><p>قدّم طلبك للانضمام لفريق الإدارة</p></div>
+    <div class="card"><h3>🎫 تذاكر الدعم</h3><p>افتح تذكرة للحصول على المساعدة</p></div>
+    <div class="card"><h3>⚠️ الشكاوى</h3><p>قدّم شكوى ضد أي لاعب أو إداري</p></div>
+    <div class="card"><h3>💡 الاقتراحات</h3><p>شارك أفكارك لتطوير السيرفر</p></div>
+  </div>
+</div>
+
+<div id="app">
+  <nav class="nav">
+    <div class="logo">TRUST RP</div>
+    <div class="user-bar">
+      <img id="u-avatar" src="">
+      <span id="u-name"></span>
+      <a href="/auth/logout" class="btn" style="background:#ef4444;color:#fff">خروج</a>
+    </div>
+  </nav>
+  <div class="hero">
+    <h1>أهلاً <span id="u-name2"></span> 👋</h1>
+    <p>اختر من القائمة ما تريد القيام به</p>
+  </div>
+  <div class="cards">
+    <div class="card" style="cursor:pointer" onclick="alert('قريباً - صفحة التقديم الكاملة')"><h3>📋 تقديم طلب</h3><p>قدّم طلبك للانضمام لفريق الإدارة</p></div>
+    <div class="card" style="cursor:pointer" onclick="alert('قريباً - صفحة التذاكر الكاملة')"><h3>🎫 تذاكر الدعم</h3><p>افتح تذكرة للحصول على المساعدة</p></div>
+    <div class="card" style="cursor:pointer" onclick="alert('قريباً - صفحة الشكاوى الكاملة')"><h3>⚠️ الشكاوى</h3><p>قدّم شكوى ضد أي لاعب أو إداري</p></div>
+    <div class="card" style="cursor:pointer" onclick="alert('قريباً - صفحة الاقتراحات الكاملة')"><h3>💡 الاقتراحات</h3><p>شارك أفكارك لتطوير السيرفر</p></div>
+  </div>
+</div>
+
+<script>
+fetch('/auth/me').then(r=>r.json()).then(d=>{
+  if(d.authenticated){
+    document.getElementById('landing').style.display='none';
+    document.getElementById('app').style.display='block';
+    document.getElementById('u-avatar').src=d.user.avatar;
+    document.getElementById('u-name').textContent=d.user.username;
+    document.getElementById('u-name2').textContent=d.user.username;
+  }
+});
+</script>
+</body>
+</html>

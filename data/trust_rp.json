@@ -1,0 +1,136 @@
+{
+  "users": [],
+  "applications": [],
+  "application_questions": [
+    {
+      "id": 1,
+      "rank_slug": "admin",
+      "question": "ما هو اسمك الحقيقي؟",
+      "type": "text",
+      "required": 1,
+      "order_num": 1
+    },
+    {
+      "id": 2,
+      "rank_slug": "admin",
+      "question": "كم عمرك؟",
+      "type": "number",
+      "required": 1,
+      "order_num": 2
+    },
+    {
+      "id": 3,
+      "rank_slug": "admin",
+      "question": "كم ساعة يمكنك العمل يومياً؟",
+      "type": "text",
+      "required": 1,
+      "order_num": 3
+    },
+    {
+      "id": 4,
+      "rank_slug": "admin",
+      "question": "ما هي خبرتك في الإدارة؟",
+      "type": "textarea",
+      "required": 1,
+      "order_num": 4
+    },
+    {
+      "id": 5,
+      "rank_slug": "admin",
+      "question": "لماذا تريد الانضمام لفريق الإدارة؟",
+      "type": "textarea",
+      "required": 1,
+      "order_num": 5
+    }
+  ],
+  "tickets": [],
+  "ticket_messages": [],
+  "complaints": [],
+  "reports": [],
+  "suggestions": [],
+  "suggestion_votes": [],
+  "staff_thanks": [],
+  "announcements": [],
+  "notifications": [],
+  "activity_logs": [],
+  "ranks": [
+    {
+      "id": 1,
+      "name": "Owner",
+      "slug": "owner",
+      "color": "#ff4757",
+      "level": 10,
+      "description": "مالك السيرفر",
+      "is_active": 1
+    },
+    {
+      "id": 2,
+      "name": "Founder",
+      "slug": "founder",
+      "color": "#ffd700",
+      "level": 9,
+      "description": "مؤسس السيرفر",
+      "is_active": 1
+    },
+    {
+      "id": 3,
+      "name": "Head Admin",
+      "slug": "head-admin",
+      "color": "#ff6b35",
+      "level": 8,
+      "description": "رئيس الإدارة",
+      "is_active": 1
+    },
+    {
+      "id": 4,
+      "name": "Senior Admin",
+      "slug": "senior-admin",
+      "color": "#ff9f43",
+      "level": 7,
+      "description": "إداري أول",
+      "is_active": 1
+    },
+    {
+      "id": 5,
+      "name": "Admin",
+      "slug": "admin",
+      "color": "#ee5a24",
+      "level": 6,
+      "description": "إداري",
+      "is_active": 1
+    },
+    {
+      "id": 6,
+      "name": "Moderator",
+      "slug": "moderator",
+      "color": "#0652dd",
+      "level": 5,
+      "description": "مشرف",
+      "is_active": 1
+    },
+    {
+      "id": 7,
+      "name": "Support",
+      "slug": "support",
+      "color": "#1289a7",
+      "level": 4,
+      "description": "دعم",
+      "is_active": 1
+    },
+    {
+      "id": 8,
+      "name": "Helper",
+      "slug": "helper",
+      "color": "#5f27cd",
+      "level": 3,
+      "description": "مساعد",
+      "is_active": 1
+    }
+  ],
+  "faqs": [],
+  "rules": [],
+  "counters": {
+    "ranks": 8,
+    "application_questions": 5
+  }
+}

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trust RP - لوحة التحكم</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI',sans-serif;background:#07090e;color:#e2e8f0}
+.nav{background:#0c0f18;padding:16px 24px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid rgba(240,192,64,0.1)}
+.logo{font-size:18px;font-weight:800;color:#f0c040}
+.user{display:flex;align-items:center;gap:10px}
+.user img{width:36px;height:36px;border-radius:50%}
+.btn{background:#ef4444;color:#fff;padding:8px 16px;border-radius:6px;text-decoration:none;font-size:13px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;padding:24px}
+.stat{background:#111520;border-radius:10px;padding:20px;text-align:center}
+.stat .num{font-size:32px;font-weight:800;color:#f0c040}
+.stat .lbl{font-size:12px;color:#94a3b8;margin-top:6px}
+.section{padding:0 24px 24px}
+table{width:100%;border-collapse:collapse;background:#111520;border-radius:10px;overflow:hidden}
+th{background:#171c2b;padding:10px;text-align:right;font-size:12px;color:#94a3b8}
+td{padding:10px;border-top:1px solid rgba(255,255,255,0.05);font-size:13px}
+</style>
+</head>
+<body>
+<nav class="nav">
+  <div class="logo">🔒 TRUST RP - ADMIN PANEL</div>
+  <div class="user">
+    <img id="a-avatar" src="">
+    <span id="a-name"></span>
+    <a href="/auth/logout" class="btn">خروج</a>
+  </div>
+</nav>
+
+<div class="stats" id="stats"></div>
+
+<div class="section">
+  <h3 style="margin-bottom:12px;color:#f0c040">آخر الطلبات</h3>
+  <table>
+    <thead><tr><th>المستخدم</th><th>الرتبة</th><th>الحالة</th></tr></thead>
+    <tbody id="apps-body"><tr><td colspan="3">جاري التحميل...</td></tr></tbody>
+  </table>
+</div>
+
+<script>
+fetch('/admin/api/me').then(r=>{
+  if(!r.ok) throw new Error();
+  return r.json();
+}).then(d=>{
+  document.getElementById('a-avatar').src=d.avatar;
+  document.getElementById('a-name').textContent=d.username+' ('+d.role+')';
+}).catch(()=>{ window.location.href='/admin/login'; });
+
+fetch('/admin/api/stats').then(r=>r.json()).then(s=>{
+  document.getElementById('stats').innerHTML=`
+    <div class="stat"><div class="num">${s.users}</div><div class="lbl">إجمالي الأعضاء</div></div>
+    <div class="stat"><div class="num">${s.apps_pending}</div><div class="lbl">طلبات معلقة</div></div>
+    <div class="stat"><div class="num">${s.tickets_open}</div><div class="lbl">تذاكر مفتوحة</div></div>
+    <div class="stat"><div class="num">${s.complaints_pending}</div><div class="lbl">شكاوى معلقة</div></div>
+  `;
+});
+
+fetch('/admin/api/applications?status=pending').then(r=>r.json()).then(apps=>{
+  const body=document.getElementById('apps-body');
+  if(!apps.length){ body.innerHTML='<tr><td colspan="3">لا توجد طلبات</td></tr>'; return; }
+  body.innerHTML=apps.map(a=>`<tr><td>${a.username}</td><td>${a.rank_name||a.rank_slug}</td><td>${a.status}</td></tr>`).join('');
+});
+</script>
+</body>
+</html>
